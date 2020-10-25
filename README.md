@@ -1,9 +1,20 @@
-# python-parsley
-Recipe based scraping of website content
-
 ![Python Package](https://github.com/beesperester/python-parsley/workflows/Python%20Package/badge.svg?branch=main)
 
+# python-parsley
+Recipe based scraping of website content. Create recipes for any website and extract any content from the html source in a simple and straig forward matter. Use **transformers** to convert the extracted data in a way most suitable for your further processing.
+
+## Table of contents
+1. [Description](#description)
+1. [Example](#example)
+1. [Transformers](#transformers)
+
+## Description
+
+Detailed description needs to be written.
+
 ## Example
+
+This is your basic recipe json-file. It contains all the datapoints you want to extract.
 
 > /path/to/config.json
 
@@ -22,6 +33,8 @@ Recipe based scraping of website content
     }
 ]
 ```
+
+This is an example usecase using a mockup html markug.
 
 > example.py
 
