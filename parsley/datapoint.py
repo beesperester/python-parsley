@@ -2,6 +2,7 @@
 
 
 from parsley.pointer import create_pointer
+from parsley.transformers.transformers import create_transformers
 
 
 class Datapoint(object):
@@ -34,10 +35,14 @@ def create_datapoint(config):
     name = config["name"]
     pointer = create_pointer(config["pointer"])
 
+    transformers = None
+    if "transformers" in config.keys():
+        transformers = create_transformers(config["transformers"])
+
     datapoint = Datapoint(
         name,
         pointer,
-        config["transformers"] if "transformers" in config.keys() else None,
+        transformers,
         config["validators"] if "validators" in config.keys() else None
     )
 
