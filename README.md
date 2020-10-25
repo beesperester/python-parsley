@@ -1,12 +1,17 @@
 ![Python Package](https://github.com/beesperester/python-parsley/workflows/Python%20Package/badge.svg?branch=main)
 
 # python-parsley
-Recipe based scraping of website content. Create recipes for any website and extract any content from the html source in a simple and straig forward matter. Use **transformers** to convert the extracted data in a way most suitable for your further processing.
+Recipe based scraping of website content. 
+
+Create recipes for any website and extract any content from the html source in a simple and straightforward matter. Use **transformers** to convert the extracted data in a way most suitable for your further processing.
 
 ## Table of contents
 1. [Description](#description)
 1. [Example](#example)
 1. [Transformers](#transformers)
+    * [String](#string)
+    * [Cast](#cast)
+    * [Math](#math)
 
 ## Description
 
