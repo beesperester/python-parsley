@@ -3,16 +3,12 @@
 import unittest
 
 from parsley.transformers.transformer import Transformer
-from parsley.transformers.transformers import \
-    create_transformers, \
-    register
+from parsley.transformers.transformers import create_transformers
 
 
 class TestTransformersMethods(unittest.TestCase):
 
     def test_create_transformers(self):
-        register()
-
         config = [
             {
                 "name": "string_replace",
