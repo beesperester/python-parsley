@@ -4,7 +4,7 @@ import unittest
 
 from bs4 import BeautifulSoup
 
-from data import example_source
+from tests.data import example_source
 
 from parsley.pointer import \
     Pointer, \
