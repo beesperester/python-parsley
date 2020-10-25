@@ -6,5 +6,5 @@ from parsley.schema import create_schema
 
 schema = create_schema("/path/to/config.json")
 
-data = schema.apply("http://www.example.com)
+data = schema.apply(soup)
 ```
