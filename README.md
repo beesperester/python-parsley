@@ -14,9 +14,14 @@ Recipe based scraping of website content
 ```
 
 ```python
+from bs4 import BeautifulSoup
 from parsley.schema import create_schema
 
 schema = create_schema_from_file("/path/to/config.json")
+
+source = "<html><head><title>Example</title></head><body><h1 class=\"title\">This is an Example</h1></body></html>"
+
+soup = BeautifulSoup(source, "lxml")
 
 data = schema.apply(soup)
 ```
