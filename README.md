@@ -1,6 +1,8 @@
 # python-parsley
 Recipe based scraping of website content
 
+![Python package](https://github.com/beesperester/python-parsley/workflows/Python%20package/badge.svg?branch=main)
+
 **/path/to/config.json**
 ```json
 [
