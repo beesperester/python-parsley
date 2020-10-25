@@ -2,11 +2,6 @@
 
 
 from parsley.classes.register import Register
-from parsley.transformers.string import string_replace
-
-
-def register():
-    TRANSFORMERS.register(string_replace)
 
 
 def create_transformers(config):

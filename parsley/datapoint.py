@@ -28,6 +28,14 @@ class Datapoint(object):
             "validators": [x.serialize() for x in self.validators]
         }
 
+    def extract(self, soup):
+        data = self.pointer.extract(soup)
+
+        for transformer in self.transformers:
+            data = transformer.apply(data)
+
+        return data
+
 
 def create_datapoint(config):
     """Create Datapoint instance from config dict."""
@@ -35,7 +43,7 @@ def create_datapoint(config):
     name = config["name"]
     pointer = create_pointer(config["pointer"])
 
-    transformers = None
+    transformers = []
     if "transformers" in config.keys():
         transformers = create_transformers(config["transformers"])
 

@@ -17,6 +17,13 @@ class Schema(object):
     def apply(self, soup):
         """Apply schema to soup."""
 
+        data = {}
+
+        for datapoint in self.datapoints:
+            data[datapoint.name] = datapoint.extract(soup)
+
+        return data
+
     def serialize(self):
         return [
             x.serialize() for x in self.datapoints
