@@ -3,7 +3,7 @@ Recipe based scraping of website content
 
 ![Python Package](https://github.com/beesperester/python-parsley/workflows/Python%20Package/badge.svg?branch=main)
 
-**/path/to/config.json**
+/path/to/config.json
 ```json
 [
     {
@@ -20,6 +20,7 @@ Recipe based scraping of website content
 ]
 ```
 
+example.py
 ```python
 from bs4 import BeautifulSoup
 
