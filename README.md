@@ -8,20 +8,48 @@ Recipe based scraping of website content
 [
     {
         "name": "title",
-        "pointer": "{find:h1.title}.text
+        "pointer": "{find:h1.title}.text",
+        "transformers": [
+            {
+                "name": "string_replace",
+                "find": "an Example",
+                "replace": "awesome"
+            }
+        ]
     }
 ]
 ```
 
 ```python
 from bs4 import BeautifulSoup
-from parsley.schema import create_schema
 
+# import create_schema and string transformers
+from parsley.schema import create_schema_from_file
+from parsley.transformers import string
+
+# register string transformers
+string.register()
+
+# create schema from json file
 schema = create_schema_from_file("/path/to/config.json")
 
-source = "<html><head><title>Example</title></head><body><h1 class=\"title\">This is an Example</h1></body></html>"
+# create html example mockup
+example_source = (
+    "<html>"
+    "<head>"
+    "<title>Example</title>"
+    "</head>"
+    "<body>"
+    "<h1 class=\"title\">This is an Example</h1>"
+    "</body>"
+    "</html>"
+)
 
-soup = BeautifulSoup(source, "lxml")
+soup = BeautifulSoup(example_source, "lxml")
 
+# apply schema to soup
 data = schema.apply(soup)
+
+print(data)
+# prints: 'This is awesome'
 ```
