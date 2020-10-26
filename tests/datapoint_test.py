@@ -10,7 +10,7 @@ from parsley.datapoint import \
     Datapoint, \
     create_datapoint
 from parsley.pointer import create_pointer_from_shorthand
-from parsley.transformers import string
+from parsley.mutations import string
 
 
 class TestDatapointMethods(unittest.TestCase):
@@ -49,7 +49,7 @@ class TestDatapointMethods(unittest.TestCase):
                 "argument": "h1.title",
                 "path": "text"
             },
-            "transformers": [],
+            "mutations": [],
             "validators": []
         }
 
@@ -66,7 +66,7 @@ class TestDatapointMethods(unittest.TestCase):
         config = {
             "name": "title",
             "pointer": "{find:h1.title}.text",
-            "transformers": [
+            "mutations": [
                 {
                     "name": "string_replace",
                     "find": "an Example",

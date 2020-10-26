@@ -1,8 +1,8 @@
-"""Module contains transformer related classes and methods."""
+"""Module contains mutation related classes and methods."""
 
 
-class Transformer(object):
-    """Transformer class."""
+class Mutation(object):
+    """Mutation class."""
 
     def __init__(self, name, callback, **kwargs):
         self.name = name
@@ -24,12 +24,12 @@ class Transformer(object):
         }
 
 
-class TransformerWrapper(object):
-    """TransformerWrapper class."""
+class MutationWrapper(object):
+    """MutationWrapper class."""
 
     def __init__(self, name, callback):
         self.name = name
         self.callback = callback
 
     def setup(self, **kwargs):
-        return Transformer(self.name, self.callback, **kwargs)
+        return Mutation(self.name, self.callback, **kwargs)

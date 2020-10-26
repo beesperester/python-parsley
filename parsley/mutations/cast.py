@@ -1,8 +1,8 @@
-"""Module contains cast related transformer classes and methods."""
+"""Module contains cast related mutation classes and methods."""
 
 
-from parsley.transformers.transformer import TransformerWrapper
-from parsley.transformers.transformers import TRANSFORMERS
+from parsley.mutations.mutation import MutationWrapper
+from parsley.mutations.mutations import Mutations
 
 
 def cast_float_method(data, **kwargs):
@@ -39,11 +39,13 @@ def cast_int_method(data, **kwargs):
 
 
 def register():
-    cast_float = TransformerWrapper("cast_float", cast_float_method)
-    TRANSFORMERS.register(cast_float)
+    mutations = Mutations()
 
-    cast_string = TransformerWrapper("cast_string", cast_string_method)
-    TRANSFORMERS.register(cast_string)
+    cast_float = MutationWrapper("cast_float", cast_float_method)
+    mutations.register(cast_float)
 
-    cast_int = TransformerWrapper("cast_int", cast_int_method)
-    TRANSFORMERS.register(cast_int)
+    cast_string = MutationWrapper("cast_string", cast_string_method)
+    mutations.register(cast_string)
+
+    cast_int = MutationWrapper("cast_int", cast_int_method)
+    mutations.register(cast_int)

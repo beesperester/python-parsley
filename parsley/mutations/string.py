@@ -1,8 +1,8 @@
-"""Module contains string related transformer classes and methods."""
+"""Module contains string related mutation classes and methods."""
 
 
-from parsley.transformers.transformer import TransformerWrapper
-from parsley.transformers.transformers import TRANSFORMERS
+from parsley.mutations.mutation import MutationWrapper
+from parsley.mutations.mutations import Mutations
 
 
 def replace_method(data, **kwargs):
@@ -39,11 +39,13 @@ def strip_method(data, **kwargs):
 
 
 def register():
-    string_replace = TransformerWrapper("string_replace", replace_method)
-    TRANSFORMERS.register(string_replace)
+    mutations = Mutations()
 
-    string_split = TransformerWrapper("string_split", split_method)
-    TRANSFORMERS.register(string_split)
+    string_replace = MutationWrapper("string_replace", replace_method)
+    mutations.register(string_replace)
 
-    string_strip = TransformerWrapper("string_strip", strip_method)
-    TRANSFORMERS.register(string_strip)
+    string_split = MutationWrapper("string_split", split_method)
+    mutations.register(string_split)
+
+    string_strip = MutationWrapper("string_strip", strip_method)
+    mutations.register(string_strip)
