@@ -2,13 +2,16 @@
 
 import unittest
 
-from parsley.transformers.transformer import Transformer
-from parsley.transformers.transformers import create_transformers
+from parsley.mutations.mutation import Mutation
+from parsley.mutations.mutations import create_mutations
+from parsley.mutations import string
 
 
-class TestTransformersMethods(unittest.TestCase):
+class TestMutationsMethods(unittest.TestCase):
 
-    def test_create_transformers(self):
+    def test_create_mutations(self):
+        string.register()
+
         config = [
             {
                 "name": "string_replace",
@@ -17,9 +20,9 @@ class TestTransformersMethods(unittest.TestCase):
             }
         ]
 
-        result = create_transformers(config)
+        result = create_mutations(config)
         expected_result = [
-            Transformer(
+            Mutation(
                 "string_replace",
                 None,
                 find="foo",

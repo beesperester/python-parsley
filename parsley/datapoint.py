@@ -2,37 +2,37 @@
 
 
 from parsley.pointer import create_pointer
-from parsley.transformers.transformers import create_transformers
+from parsley.mutations.mutations import create_mutations
 
 
 class Datapoint(object):
     """Datapoint class."""
 
-    def __init__(self, name, pointer, transformers=None, validators=None):
-        if transformers is None:
-            transformers = []
+    def __init__(self, name, pointer, mutations=None, validators=None):
+        if mutations is None:
+            mutations = []
 
         if validators is None:
             validators = []
 
         self.name = name
         self.pointer = pointer
-        self.transformers = transformers
+        self.mutations = mutations
         self.validators = validators
 
     def serialize(self):
         return {
             "name": self.name,
             "pointer": self.pointer.serialize(),
-            "transformers": [x.serialize() for x in self.transformers],
+            "mutations": [x.serialize() for x in self.mutations],
             "validators": [x.serialize() for x in self.validators]
         }
 
     def extract(self, soup):
         data = self.pointer.extract(soup)
 
-        for transformer in self.transformers:
-            data = transformer.apply(data)
+        for mutation in self.mutations:
+            data = mutation.apply(data)
 
         return data
 
@@ -43,14 +43,14 @@ def create_datapoint(config):
     name = config["name"]
     pointer = create_pointer(config["pointer"])
 
-    transformers = []
-    if "transformers" in config.keys():
-        transformers = create_transformers(config["transformers"])
+    mutations = []
+    if "mutations" in config.keys():
+        mutations = create_mutations(config["mutations"])
 
     datapoint = Datapoint(
         name,
         pointer,
-        transformers,
+        mutations,
         config["validators"] if "validators" in config.keys() else None
     )
 
