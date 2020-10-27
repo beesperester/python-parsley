@@ -12,6 +12,9 @@ Create recipes for any website and extract any content from the html source in a
     * [String](#string)
     * [Cast](#cast)
     * [Math](#math)
+1. [Validations](#validations)
+    * [Generic](#generic)
+    * [Compare](#compare)
 
 ## Description
 
@@ -156,5 +159,54 @@ Multiply input by value.
 {
     "name": "math_multiply",
     "value": 2
+}
+```
+
+## Validations
+
+### Generic
+
+**generic_required**
+
+Input is required.
+
+```json
+{
+    "name": "generic_required"
+}
+```
+
+### Compare
+
+**compare_larger**
+
+Input must be larger than value.
+
+```json
+{
+    "name": "compare_larger",
+    "value": 0
+}
+```
+
+**compare_smaller**
+
+Input must be smaller than value.
+
+```json
+{
+    "name": "compare_smaller",
+    "value": 1000.0
+}
+```
+
+**compare_equal**
+
+Input must be equal to value.
+
+```json
+{
+    "name": "compare_equal",
+    "value": 0
 }
 ```

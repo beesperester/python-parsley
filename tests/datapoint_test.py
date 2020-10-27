@@ -50,7 +50,7 @@ class TestDatapointMethods(unittest.TestCase):
                 "path": "text"
             },
             "mutations": [],
-            "validators": []
+            "validations": []
         }
 
         self.assertDictEqual(
