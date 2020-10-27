@@ -3,29 +3,30 @@
 
 from parsley.pointer import create_pointer
 from parsley.mutations.mutations import create_mutations
+from parsley.validations.validations import create_validations
 
 
 class Datapoint(object):
     """Datapoint class."""
 
-    def __init__(self, name, pointer, mutations=None, validators=None):
+    def __init__(self, name, pointer, mutations=None, validations=None):
         if mutations is None:
             mutations = []
 
-        if validators is None:
-            validators = []
+        if validations is None:
+            validations = []
 
         self.name = name
         self.pointer = pointer
         self.mutations = mutations
-        self.validators = validators
+        self.validations = validations
 
     def serialize(self):
         return {
             "name": self.name,
             "pointer": self.pointer.serialize(),
             "mutations": [x.serialize() for x in self.mutations],
-            "validators": [x.serialize() for x in self.validators]
+            "validations": [x.serialize() for x in self.validations]
         }
 
     def extract(self, soup):
@@ -33,6 +34,9 @@ class Datapoint(object):
 
         for mutation in self.mutations:
             data = mutation.apply(data)
+
+        for validation in self.validations:
+            validation.apply(self.name, data)
 
         return data
 
@@ -47,11 +51,15 @@ def create_datapoint(config):
     if "mutations" in config.keys():
         mutations = create_mutations(config["mutations"])
 
+    validations = []
+    if "validations" in config.keys():
+        validations = create_validations(config["validations"])
+
     datapoint = Datapoint(
         name,
         pointer,
         mutations,
-        config["validators"] if "validators" in config.keys() else None
+        validations
     )
 
     return datapoint

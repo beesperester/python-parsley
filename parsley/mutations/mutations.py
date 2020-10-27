@@ -4,6 +4,8 @@
 from parsley.classes.register import Register
 from parsley.classes.singleton import Singleton
 
+from parsley.mutations.exceptions import MissingMutationError
+
 
 class Mutations(Singleton, Register):
     """Mutations class."""
@@ -29,6 +31,10 @@ def create_mutations(config):
 
             applicable_mutations.append(
                 mutation_wrapper.setup(**mutation_config)
+            )
+        else:
+            raise MissingMutationError(
+                "Missing mutation '{}'".format(mutation_name)
             )
 
     return applicable_mutations
