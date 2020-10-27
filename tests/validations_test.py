@@ -4,13 +4,13 @@ import unittest
 
 from parsley.validations.validation import Validation
 from parsley.validations.validations import create_validations
-from parsley.validations import string
+from parsley.validations import generic
 
 
 class TestValidationsMethods(unittest.TestCase):
 
     def test_create_validations(self):
-        string.register()
+        generic.register()
 
         config = [
             {
