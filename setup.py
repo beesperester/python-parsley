@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="parsley-beesperester",
-    version="0.0.1",
+    version="0.0.2",
     author="Bernhard Esperester",
     author_email="bernhard@esperester.de",
     description="Use simple recipes to extract, mutate and validate data from BeautifulSoup objects",
