@@ -12,9 +12,11 @@ Create recipes for any website and extract any content from the html source in a
     * [String](#string)
     * [Cast](#cast)
     * [Math](#math)
+    * [Extending](#extending-mutations)
 1. [Validations](#validations)
     * [Generic](#generic)
     * [Compare](#compare)
+    * [Extending](#extending-validations)
 
 ## Description
 
@@ -37,6 +39,11 @@ This is your basic recipe json-file. It contains all the datapoints you want to 
                 "find": "an Example",
                 "replace": "awesome"
             }
+        ],
+        "validations": [
+            {
+                "name": "generic_required"
+            }
         ]
     }
 ]
@@ -52,9 +59,13 @@ from bs4 import BeautifulSoup
 # import create_schema and string mutations
 from parsley.schema import create_schema_from_file
 from parsley.mutations import string
+from parsley.validations import generic
 
 # register string mutations
 string.register()
+
+# register generic validations
+generic.register()
 
 # create schema from json file
 schema = create_schema_from_file("/path/to/config.json")
@@ -81,6 +92,10 @@ print(data)
 ```
 
 ## Mutations
+
+Mutations are small functions that process the extracted data in the order they are set up. This makes it easy to grab &ndash; for example &ndash; a string value, strip away whitespace and cast it into a float.
+
+Mutations work on either single data points or lists, where every mutation will be applied to each item in the list.
 
 ### String
 
@@ -162,7 +177,39 @@ Multiply input by value.
 }
 ```
 
+### Extending Mutations
+
+You can add your own mutations.
+
+```python
+from parsley.mutations.mutation import MutationWrapper
+from parsley.mutations.mutations import Mutations
+
+# get mutations singleton instance
+mutations = Mutations()
+
+# create mutations callback
+# first argument is the data which will be mutated
+# second argument can be any extra key value pair from the config
+def my_callback(data, **kwargs):
+    # do something to the data
+    if isinstance(data, str):
+        return data.lower()
+
+    raise Exception("Input must be of type 'str'")
+
+# create mutation wrapper
+# first argument is the key by which it can be used from the config
+# second argument is the method that should be called
+my_mutation = MutationWrapper("my_mutation", my_callback)
+
+# register your mutation with the mutations singleton
+mutations.register(my_mutation)
+```
+
 ## Validations
+
+Validations are small functions for checking if the extracted data matches the criteria described in the schema config.
 
 ### Generic
 
@@ -209,4 +256,34 @@ Input must be equal to value.
     "name": "compare_equal",
     "value": 0
 }
+```
+
+### Extending Validations
+
+You can add your own validations.
+
+```python
+from parsley.validations.validation import ValidationWrapper
+from parsley.validations.validations import Validations
+from parsley.validations.exceptions import ValidationError
+
+# get validations singleton instance
+validations = Validations()
+
+# create validations callback
+# first argument is the name of the input
+# second argument is the data which will be mutated
+# third argument can be any extra key value pair from the config
+def my_callback(key, data, **kwargs):
+    # do something to the data
+    if not isinstance(data, str):
+        raise ValidationError("Input must be of type 'str'")
+
+# create validation wrapper
+# first argument is the key by which it can be used from the config
+# second argument is the method that should be called
+my_validation = ValidationWrapper("my_validation", my_callback)
+
+# register your validation with the validations singleton
+validations.register(my_validation)
 ```
