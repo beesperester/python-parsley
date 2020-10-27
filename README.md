@@ -3,12 +3,12 @@
 # python-parsley
 Recipe based scraping of website content. 
 
-Create recipes for any website and extract any content from the html source in a simple and straightforward matter. Use **transformers** to convert the extracted data in a way most suitable for your further processing.
+Create recipes for any website and extract any content from the html source in a simple and straightforward matter. Use **mutations** to convert the extracted data in a way most suitable for your further processing.
 
 ## Table of contents
 1. [Description](#description)
 1. [Example](#example)
-1. [Transformers](#transformers)
+1. [Mutations](#mutations)
     * [String](#string)
     * [Cast](#cast)
     * [Math](#math)
@@ -28,7 +28,7 @@ This is your basic recipe json-file. It contains all the datapoints you want to 
     {
         "name": "title",
         "pointer": "{find:h1.title}.text",
-        "transformers": [
+        "mutations": [
             {
                 "name": "string_replace",
                 "find": "an Example",
@@ -46,11 +46,11 @@ This is an example usecase using a mockup html markug.
 ```python
 from bs4 import BeautifulSoup
 
-# import create_schema and string transformers
+# import create_schema and string mutations
 from parsley.schema import create_schema_from_file
-from parsley.transformers import string
+from parsley.mutations import string
 
-# register string transformers
+# register string mutations
 string.register()
 
 # create schema from json file
@@ -77,7 +77,7 @@ print(data)
 # prints: 'This is awesome'
 ```
 
-## Transformers
+## Mutations
 
 ### String
 
