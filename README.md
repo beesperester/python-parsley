@@ -49,7 +49,7 @@ This is your basic recipe json-file. It contains all the datapoints you want to 
 ]
 ```
 
-This is an example usecase using a mockup html markug.
+This is an example usecase using a mockup html markup.
 
 > example.py
 
